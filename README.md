@@ -1,11 +1,14 @@
 # reczip
-Simple CLI tool to zip all files from specified directory recursively. It puts each file in separate archive.
+Simple CLI tool to zip all files from a specified directory and its subdirectories. It puts an each file in a separate archive.
 
-Arguments:
---path
-    starting directory
---ext
+### Arguments:
++ --path  
+    starting (root) directory
++ --ext  
     filter files by extension
---del=true
++ --del=true  
     delete file after archiving
 
+### Example:
+reczip --path /home/user/text --ext .txt --del=true  
+Archive all txt files in /home/user/text each to a single file archive {txt filename}.txt.zip, deletes source txt file after archiving.
