@@ -11,4 +11,4 @@ Simple CLI tool to zip all files from a specified directory and its subdirectori
 
 ### Example:
 reczip --path /home/user/text --ext .txt --del=true  
-Archive all txt files in /home/user/text each to a single file archive {txt filename}.txt.zip, deletes source txt file after archiving.
+Archives all txt files in /home/user/text each to a single file archive {txt filename}.txt.zip, deletes source txt file after archiving.
