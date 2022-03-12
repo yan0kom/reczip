@@ -1,3 +1,3 @@
 module github.com/yan0kom/reczip
 
-go 1.14
+go 1.17
