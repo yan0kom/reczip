@@ -11,26 +11,31 @@ import (
 )
 
 var rootPath string
-var extention string
+var extension string
 var deleteSource bool
 
 var filterByExtension = false
 var filenames = make(chan string, 100)
 
 func init() {
-	flag.StringVar(&rootPath, "path", ".", "path to files")
-	flag.StringVar(&extention, "ext", "", "filter by extension")
+	flag.StringVar(&rootPath, "path", "", "path to files")
+	flag.StringVar(&extension, "ext", "", "extension of files to archive")
 	flag.BoolVar(&deleteSource, "del", false, "delete source file")
 }
 
 func main() {
 	flag.Parse()
+	if rootPath == "" || extension == "" || flag.NFlag() != 3 {
+		flag.Usage()
+		os.Exit(1)
+	}
 
-	filterByExtension = len(extention) > 0
+
+	filterByExtension = len(extension) > 0
 
 	fmt.Printf("Input path: %s\n", rootPath)
 	if filterByExtension {
-		fmt.Printf("Filter by extension: %s\n", extention)
+		fmt.Printf("Filter by extension: %s\n", extension)
 	}
 
 	go enumerateFilenames()
@@ -56,7 +61,7 @@ func enumerateFilenames() {
 			return err
 		}
 		if !info.IsDir() {
-			if !filterByExtension || filepath.Ext(path) == extention {
+			if !filterByExtension || filepath.Ext(path) == extension {
 				filenames <- path
 			}
 		}
